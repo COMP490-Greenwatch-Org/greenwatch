@@ -128,3 +128,4 @@ dmypy.json
 # Pyre type checker
 .pyre/
 tensorflow_nn/test_dataset/
+tensorflow_nn/models/saved_models/
