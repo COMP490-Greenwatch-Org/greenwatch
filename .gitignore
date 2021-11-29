@@ -129,3 +129,5 @@ dmypy.json
 .pyre/
 tensorflow_nn/test_dataset/
 tensorflow_nn/models/saved_models/
+image_augmentation_*.png
+training_val_loss_*.png
