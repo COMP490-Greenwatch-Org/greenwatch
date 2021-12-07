@@ -33,7 +33,7 @@ def main() -> None:
 
     class_names = ["Healthy", "Unhealthy"]
     print(
-        "This image most likely belongs to {} with a {:.2f} percent confidance."
+        "\nThis image most likely belongs to {} with a {:.2f} percent confidance.\n"
         .format(class_names[np.argmax(score)], 100 * np.max(score))
     )
 
