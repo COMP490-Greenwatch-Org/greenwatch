@@ -56,31 +56,31 @@ val_ds = image_dataset_from_directory(
 
 AUTOTUNE = tf.data.AUTOTUNE
 
-train_ds = train_ds.cache().take(1000).prefetch(buffer_size=AUTOTUNE)
+train_ds = train_ds.cache().shuffle(1000).prefetch(buffer_size=AUTOTUNE)
 val_ds = val_ds.cache().prefetch(buffer_size=AUTOTUNE)
 
 data_augmentation = keras.Sequential(
   [
-    layers.RandomFlip("horizontal",
+    layers.RandomFlip("horizontal_and_vertical",
                       input_shape=(image_height,
                                   image_width,
                                   3)),
-    #layers.RandomRotation(0.2),
+    layers.RandomRotation(0.2),
     layers.RandomZoom(0.1),
   ]
 )
 
-plt.figure(figsize=(20, 20))
+""" plt.figure(figsize=(20, 20))
 for images, _ in train_ds.take(2):
   for i in range(9):
     augmented_images = data_augmentation(images)
     ax = plt.subplot(3, 3, i + 1)
     plt.imshow(augmented_images[0].numpy().astype("uint8"))
     plt.axis("off")
-plt.savefig('image_augmentation_' + datetime.now().strftime("%Y_%m_%d-%I_%M_%S_%p") + '.png');
+plt.savefig('image_augmentation_' + datetime.now().strftime("%Y_%m_%d-%I_%M_%S_%p") + '.png'); """
 
 
-""" model = Sequential([
+model = Sequential([
     data_augmentation,
     layers.Rescaling(1./255, input_shape=(image_height, image_width, 3)),
     layers.Conv2D(16, 3, padding='same', activation='relu'),
@@ -100,14 +100,14 @@ model.compile(optimizer='adam',
 
 model.summary()
 
-epochs=10
+epochs=15
 history = model.fit(
     train_ds,
     validation_data=val_ds,
     epochs=epochs
 )
 
-#model.save('tensorflow_nn/models/model_' + datetime.now().strftime("%Y_%m_%d-%I_%M_%S_%p"), save_format="h5")
+model.save('tensorflow_nn/models/saved_models/greenwatch_model_' + datetime.now().strftime("%Y_%m_%d-%I_%M_%S_%p") + '.h5', save_format="h5")
 
 acc = history.history['accuracy']
 val_acc = history.history['val_accuracy']
@@ -129,5 +129,4 @@ plt.plot(epochs_range, loss, label='Training Loss')
 plt.plot(epochs_range, val_loss, label='Validation Loss')
 plt.legend(loc='upper right')
 plt.title('Training and Validation Loss')
-plt.savefig('training_val_loss_' + datetime.now().strftime("%Y_%m_%d-%I_%M_%S_%p") + '.png');
- """
+plt.savefig('tensorflow_nn/figures/training_val_loss_' + datetime.now().strftime("%Y_%m_%d-%I_%M_%S_%p") + '.png')
