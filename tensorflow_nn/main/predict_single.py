@@ -20,7 +20,7 @@ def main() -> None:
     if not args.file:
         print("Please provide a valid image path")
     
-    model = tf.keras.models.load_model("./tensorflow_nn/models/saved_models/model_2021_11_22-08_07_30_PM");
+    model = tf.keras.models.load_model("./tensorflow_nn/models/saved_models/greenwatch_model_2021_12_11-03_22_17_AM.h5");
     img = tf.keras.utils.load_img(
         args.file,
         target_size=(256,256)
