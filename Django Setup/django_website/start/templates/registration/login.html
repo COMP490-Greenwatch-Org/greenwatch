@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css" />
+</head>
+
+<body>
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    Login
+                </h1>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+
+
+            <article class="media">
+                <div class="media-content">
+                    <div class="content">
+                        {% if form.errors %}
+                        <p>Oh no! Something is wrong with your login.</p>
+                        {% endif %}
+
+                <form method="POST" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                            <input type="hidden" name="next" value="{{ next }}" />
+                    <input type="submit" value="login" />
+                </form>
+                </div>
+                </div>
+            </article>
+
+            <article class="media">
+                <div class="media-content">
+                    <div class="content">
+                        <a href="{% url 'home' %}">Home</a>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+
+    </section>
+</body>
+
+</html>
