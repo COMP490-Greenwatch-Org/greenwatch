@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Greenwatch</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css" />
+</head>
+
+<body>
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <div class="container">
+
+                <h1 class="title">
+                    Greenwatch Home
+                </h1>
+
+                {% if not user.is_authenticated %}
+                <h2>Welcome to Greenwatch!</h2>
+                <h2>Already have an account? Log in here!</h2>
+
+                <article class="media">
+                    <div class="media-content">
+                        <div class="content">
+                            <p><font color = "00008B">
+                                <a href="{% url 'login' %}">Login</a>
+                                </font>
+                            </p>
+                        </div>
+                    </div>
+                </article>
+
+                <h2>Wanna register an account with us?</h2>
+
+                <article class="media">
+                    <div class="media-content">
+                        <div class="content">
+                            <p><font color = "00008B">
+                                <a href="{% url 'register' %}">Register</a>
+                                </font>
+                            </p>
+                        </div>
+                    </div>
+                </article>
+
+                {% endif %}
+
+                {% if user.is_authenticated %}
+                <h2>Welcome {{ username }}!</h2>
+
+                <article class="media">
+                    <div class="media-content">
+                        <div class="content">
+                            <p><font color = "00008B">
+                                <a href="{% url 'profile' %}">My Profile</a>
+                                </font>
+                            </p>
+                            <p><font color = "00008B">
+                                <a href="{% url 'logout' %}">Logout</a>
+                                </font>
+                            </p>
+                        </div>
+                    </div>
+                </article>
+
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+
+            <article class="media">
+                <div class="media-content">
+                    <div class="content">
+                        <p>
+                            <strong>What is Greenwatch?</strong>
+                            <br> Hello and welcome to Greenwatch! greenwatch is a service dedicated to assessing 
+                            your lawn in order to give you the the best advice towards a healthier looking lawn. 
+                            Using AoT cameras, we will monitor and inform you on the current condition your lawn is in!
+                        </p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="media">
+                <div class="media-content">
+                    <div class="content">
+                        <a href="{% url 'settings' %}">Settings</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="media">
+                <div class="media-content">
+                    <div class="content">
+                        <a href="{% url 'archive' %}">Archive</a>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+
+    </section>
+</body>
+
+</html>
