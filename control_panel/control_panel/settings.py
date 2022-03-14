@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-klqbs^)b(+p0e!5#!(od=ng(f%4-w15*6dfi49rzj8l(d0y0n+
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+#ALLOWED_HOSTS = ['greenwatch.eastus.cloudapp.azure.com','20.85.231.186']
 
 # Application definition
 
@@ -76,12 +76,25 @@ WSGI_APPLICATION = 'control_panel.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+#Dev
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+#Production
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': 'greenwatch',
+#        'USER': 'gw',
+#        'PASSWORD': '^LfWRT2^ncJg6fnk',
+#        'HOST': 'localhost',
+#        'PORT': '',
+#    }
+#}
 
 
 # Password validation
