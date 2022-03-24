@@ -1,66 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+{% load static %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Settings</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css" />
-</head>
+{% block title %}
+My Profile - Greenwatch
+{% endblock %}
 
-<body>
-    <section class="hero is-primary">
-        <div class="hero-body">
-            <div class="container">
-                <h1 class="title">
-                    My Profile
-                </h1>
+{% block banner %}
+    <p class="title">
+        My Profile
+    </p>
+    <p class="subtitle">
+        View your account details
+    </p>
+{% endblock %}
+
+{% block content %}
+    <article class="media">
+        <div class="media-content">
+            <div class="content">
+                <strong>User Information:</strong>
+                <h1>Welcome, {{ user.username }}</h1>
+                <h2>This is your profile!</h2>
+                <h3>This account is registered under {{ user.email }}</h3>
             </div>
         </div>
-    </section>
-
-    <section class="section">
-        <div class="container">
-
-            <article class="media">
-                <div class="media-content">
-                    <div class="content">
-                        <strong>User Information:</strong>
-                        <h1>Welcome, {{ user.username }}</h1>
-                        <h2>This is your profile!</h2>
-                        <h3>This account is registered under {{ user.email }}</h3>
-                    </div>
-                </div>
-            </article>
-
-            <article class="media">
-                <div class="media-content">
-                    <div class="content">
-                        <a href="{% url 'home' %}">Home</a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="media">
-                <div class="media-content">
-                    <div class="content">
-                        <a href="{% url 'archive' %}">Archive</a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="media">
-                <div class="media-content">
-                    <div class="content">
-                        <a href="{% url 'settings' %}">Settings</a>
-                    </div>
-                </div>
-            </article>
-
-        </div>
-
-    </section>
-</body>
-
-</html>
+    </article>
+{% endblock %}

@@ -1,67 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+{% load static %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Settings</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css" />
-</head>
+{% block title %}
+Settings - Greenwatch
+{% endblock %}
 
-<body>
-    <section class="hero is-primary">
-        <div class="hero-body">
-            <div class="container">
-                <h1 class="title">
-                    Greenwatch Settings
-                </h1>
+{% block banner %}
+    <p class="title">
+        Settings
+    </p>
+    <p class="subtitle">
+        Update your contact settings, set-up notifications, or reset your password
+    </p>
+{% endblock %}
+
+{% block content %}
+    <article class="media">
+        <div class="media-content">
+            <div class="content">
+                <p>
+                    <strong>What will I do here?</strong>
+                    <br> This will be our settings page where you will be able to set your
+                    prefernces such as how we will be communicating with you on your lawn
+                </p>
             </div>
         </div>
-    </section>
+    </article>
 
-    <section class="section">
-        <div class="container">
-
-            <article class="media">
-                <div class="media-content">
-                    <div class="content">
-                        <p>
-                            <strong>What will I do here?</strong>
-                            <br> This will be our settings page where you will be able to set your
-                            prefernces such as how we will be communicating with you on your lawn
-                        </p>
-                    </div>
-                </div>
-            </article>
-
-            <article class="media">
-                <div class="media-content">
-                    <div class="content">
-                        <a href="{% url 'home' %}">Home</a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="media">
-                <div class="media-content">
-                    <div class="content">
-                        <a href="{% url 'archive' %}">Archive</a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="media">
-                <div class="media-content">
-                    <div class="content">
-                        <a href="{% url 'reset_password' %}">Reset Your Password</a>
-                    </div>
-                </div>
-            </article>
-
+    <article class="media">
+        <div class="media-content">
+            <div class="content">
+                <a href="{% url 'home' %}">Home</a>
+            </div>
         </div>
+    </article>
 
-    </section>
-</body>
+    <article class="media">
+        <div class="media-content">
+            <div class="content">
+                <a href="{% url 'archive' %}">Archive</a>
+            </div>
+        </div>
+    </article>
 
-</html>
+    <article class="media">
+        <div class="media-content">
+            <div class="content">
+                <a href="{% url 'reset_password' %}">Reset Your Password</a>
+            </div>
+        </div>
+    </article>
+{% endblock %}
