@@ -1,6 +1,7 @@
 from django import forms 
 from django.contrib.auth.models import User 
 from django.contrib.auth.forms import UserCreationForm
+from .models import ExtendedUser
 
 class ExtendedUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -21,3 +22,8 @@ class ExtendedUserCreationForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+class NotificationsForm(forms.ModelForm):
+    class Meta:
+        model = ExtendedUser
+        fields = ['SMS_notifications', 'email_notifications']
