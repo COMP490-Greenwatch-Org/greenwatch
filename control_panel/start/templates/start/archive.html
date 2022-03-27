@@ -1,64 +1,32 @@
+{% extends "base.html" %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
+{% block title %}
+Archive - Greenwatch
+{% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Archive</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css" />
-</head>
+{% block banner %}
+    <p class="title">
+        Archive
+    </p>
+    <p class="subtitle">
+        See how your lawn has changed over time
+    </p>
+{% endblock %}
 
-<body>
-    <section class="hero is-primary">
-        <div class="hero-body">
-            <div class="container">
-                <h1 class="title">
-                    Greenwatch Archive
-                </h1>
+{% block content %}
+    <article class="media">
+        <div class="media-content">
+            <div class="content">
+                <p>
+                    <strong>What will be stored here?</strong>
+                    <br> This is the image archive where we will eventually store the information for each user
+                    that logs into our control panel
+                </p>
+                <img src="{% static 'start/grass (1).jpg' %}" />
+                <img src="{% static 'start/grass (2).jpg' %}" />
+                <img src="{% static 'start/grass (3).jpg' %}" />
             </div>
         </div>
-    </section>
-
-    <section class="section">
-        <div class="container">
-
-            <article class="media">
-                <div class="media-content">
-                    <div class="content">
-                        <p>
-                            <strong>What will be stored here?</strong>
-                            <br> This is the image archive where we will eventually store the information for each user
-                            that logs into our control panel
-                        </p>
-                        <img src="{% static 'start/grass (1).jpg' %}" />
-                        <img src="{% static 'start/grass (2).jpg' %}" />
-                        <img src="{% static 'start/grass (3).jpg' %}" />
-                    </div>
-                </div>
-            </article>
-
-            <article class="media">
-                <div class="media-content">
-                    <div class="content">
-                        <a href="{% url 'home' %}">Home</a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="media">
-                <div class="media-content">
-                    <div class="content">
-                        <a href="{% url 'settings' %}">Settings</a>
-                    </div>
-                </div>
-            </article>
-
-        </div>
-
-    </section>
-</body>
-
-</html>
+    </article>
+{% endblock %}
