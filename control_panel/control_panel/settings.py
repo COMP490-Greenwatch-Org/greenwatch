@@ -39,6 +39,7 @@ class Base(Configuration):
         'django.contrib.messages',
         'django.contrib.staticfiles',
         'start',
+        'camera',
     ]
 
     MIDDLEWARE = [
