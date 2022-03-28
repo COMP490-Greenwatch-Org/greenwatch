@@ -128,8 +128,10 @@ dmypy.json
 # Pyre type checker
 .pyre/
 tensorflow_nn/test_dataset/
+tensorflow_nn/dataset/
 tensorflow_nn/models/saved_models/
 image_augmentation_*.png
 training_val_loss_*.png
 neural_network/test_dataset/
+neural_network/dataset/
 neural_network/models/saved_models/
