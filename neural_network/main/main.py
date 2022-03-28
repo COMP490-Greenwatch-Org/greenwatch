@@ -25,19 +25,22 @@ def w(x: str):
         return 1
     return 0
 
-traindf = pd.read_csv('./tensorflow_nn/test_dataset.csv', dtype=str, converters={1: w});
+traindf = pd.read_csv('./neural_network/dataset.csv', dtype=str, converters={1: w});
 
+#No longer required, download sorted dataset from Google Drive
+"""
 for row in traindf.itertuples():
-    filename = 'tensorflow_nn/test_dataset/unsorted/' + row._1
+    filename = 'neural_network/dataset/unsorted/' + row._1
     dest: str;
     if (row._2 == 1):
-        dest = 'tensorflow_nn/test_dataset/images/healthy'
+        dest = 'neural_network/dataset/images/Healthy'
     else:
-        dest = 'tensorflow_nn/test_dataset/images/unhealthy'
+        dest = 'neural_network/dataset/images/Unhealthy'
     shutil.copy2(filename, dest)
+"""
 
 train_ds = image_dataset_from_directory(
-    'tensorflow_nn/test_dataset/images',
+    'neural_network/dataset/images',
     validation_split=0.2,
     subset="training",
     seed=123,
@@ -46,7 +49,7 @@ train_ds = image_dataset_from_directory(
 )
 
 val_ds = image_dataset_from_directory(
-    'tensorflow_nn/test_dataset/images',
+    'neural_network/dataset/images',
     validation_split=0.2,
     subset="validation",
     seed=123,
@@ -100,14 +103,14 @@ model.compile(optimizer='adam',
 
 model.summary()
 
-epochs=15
+epochs=25
 history = model.fit(
     train_ds,
     validation_data=val_ds,
     epochs=epochs
 )
 
-model.save('tensorflow_nn/models/saved_models/greenwatch_model_' + datetime.now().strftime("%Y_%m_%d-%I_%M_%S_%p") + '.h5', save_format="h5")
+model.save('neural_network/models/saved_models/greenwatch_model_' + datetime.now().strftime("%Y_%m_%d-%I_%M_%S_%p") + '.h5', save_format="h5")
 
 acc = history.history['accuracy']
 val_acc = history.history['val_accuracy']
@@ -129,4 +132,4 @@ plt.plot(epochs_range, loss, label='Training Loss')
 plt.plot(epochs_range, val_loss, label='Validation Loss')
 plt.legend(loc='upper right')
 plt.title('Training and Validation Loss')
-plt.savefig('tensorflow_nn/figures/training_val_loss_' + datetime.now().strftime("%Y_%m_%d-%I_%M_%S_%p") + '.png')
+plt.savefig('neural_network/figures/training_val_loss_' + datetime.now().strftime("%Y_%m_%d-%I_%M_%S_%p") + '.png')
