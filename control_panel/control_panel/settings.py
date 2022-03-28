@@ -143,6 +143,7 @@ class Base(Configuration):
 
 class Production(Base):
     Debug = False
+    STATIC_ROOT = "/home/egCSUN/greenwatch-deploy/greenwatch/control_panel/static"
     ALLOWED_HOSTS = ['greenwatch.eastus.cloudapp.azure.com','20.85.231.186']
     DATABASES = {
         'default': {
