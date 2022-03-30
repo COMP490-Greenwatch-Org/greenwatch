@@ -123,7 +123,7 @@ class Base(Configuration):
     # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
     STATIC_URL = 'static/'
-    STATIC_ROOT = "/home/egCSUN/greenwatch-deploy/greenwatch/control_panel/static"
+    MEDIA_URL = 'media/'
 
     # Default primary key field type
     # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -145,6 +145,8 @@ class Base(Configuration):
 
 class Production(Base):
     Debug = False
+    STATIC_ROOT = "/home/egCSUN/greenwatch-deploy/greenwatch/control_panel/static"
+    MEDIA_ROOT = "/home/egCSUN/greenwatch-deploy/greenwatch/control_panel/media"
     ALLOWED_HOSTS = ['greenwatch.eastus.cloudapp.azure.com','20.85.231.186']
     DATABASES = {
         'default': {
