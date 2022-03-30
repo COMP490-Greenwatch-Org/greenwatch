@@ -1,7 +1,10 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Camera(models.Model):
+    user = models.ForeignKey(User, on_delete = models.CASCADE, null = True)
     name = models.CharField(max_length = 10)
+    rtsp_url = models.URLField(default = '')
 
     def __str__(self):
         return self.name
