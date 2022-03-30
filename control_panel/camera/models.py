@@ -10,7 +10,7 @@ class Camera(models.Model):
         return self.name
 
 class Image(models.Model):
-    camera = models.ForeignKey(Camera, on_delete = models.CASCADE, null = True)
+    camera = models.ForeignKey(Camera, on_delete = models.CASCADE)
     name = models.CharField(max_length = 10)
     image = models.ImageField(null=True)
     results = models.CharField(max_length = 100, null = True)
