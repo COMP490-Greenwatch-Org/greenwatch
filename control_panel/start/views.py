@@ -6,8 +6,8 @@ from camera.models import Camera, Image
 
 def index(request):
     username = request.user.username
-    cameras = Camera.objects.filter(user=request.user)
-    context = {'username' : username, 'cameras' : cameras}
+    #cameras = Camera.objects.filter(user=request.user)
+    context = {'username' : username}
     return render(request, 'start/index.html', context)
 
 @login_required
