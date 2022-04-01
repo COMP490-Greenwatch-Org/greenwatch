@@ -48,3 +48,9 @@ def register(request):
 
     context = {'form' : form}
     return render(request, 'start/register.html', context)
+
+def about(request):
+    return render(request, 'start/about.html')
+
+def contact(request):
+    return render(request, 'start/contact.html')
