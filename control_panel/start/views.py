@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from .forms import ExtendedUserCreationForm, NotificationsForm
 from camera.models import Camera, Image
+from .notifications import notify
 
 def index(request):
     username = request.user.username
