@@ -23,9 +23,16 @@ Archive - Greenwatch
                     <br> This is the image archive where we will eventually store the information for each user
                     that logs into our control panel
                 </p>
-                <img src="{% static 'start/grass (1).jpg' %}" />
-                <img src="{% static 'start/grass (2).jpg' %}" />
-                <img src="{% static 'start/grass (3).jpg' %}" />
+
+                <div class="tile is-ancestor">
+                    <div class="tile is-4 is-vertical is-parent">
+                      <div class="tile is-child box">
+                        <p class="title">{{the_image.name}}</p>
+                        <img src="{{ the_image.image.url }}" />
+                        <br> Image taken {{the_image.date}}<br>
+                      </div>
+                    </div>
+                </div>
             </div>
         </div>
     </article>
