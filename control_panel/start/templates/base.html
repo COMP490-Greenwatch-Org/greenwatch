@@ -44,10 +44,10 @@
                     </a>
 
                     <div class="navbar-dropdown">
-                        <a class="navbar-item">
+                        <a class="navbar-item" href="{% url 'about' %}">
                             About
                         </a>
-                        <a class="navbar-item">
+                        <a class="navbar-item" href="{% url 'contact' %}">
                             Contact
                         </a>
                         <hr class="navbar-divider">
@@ -94,33 +94,23 @@
             {% endblock %}
         </div>
     </section>
-    <section class="section">
-        <div class="container">
-            <article class="media">
-                <div class="media-content">
-                    <div class="content">
-                        <a href="{% url 'home' %}">Home</a>
-                    </div>
-                </div>
-            </article>
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <nav class="level">
+                <p class="level-item has-text-centered">
+                    <a class="link is-info" href="{% url 'home' %}">Home</a>
+                </p>
 
-            <article class="media">
-                <div class="media-content">
-                    <div class="content">
-                        <a href="{% url 'archive' %}">Archive</a>
-                    </div>
-                </div>
-            </article>
+                <p class="level-item has-text-centered">
+                    <a class="link is-info" href="{% url 'archive' %}">Archive</a></p>
+                </p>
 
-            <article class="media">
-                <div class="media-content">
-                    <div class="content">
-                        <a href="{% url 'settings' %}">Settings</a>
-                    </div>
-                </div>
-            </article>
+                <p class="level-item has-text-centered">
+                    <a class="link is-info" href="{% url 'settings' %}">Settings</a>
+                </p>
+            </nav>
         </div>
-    </section>
+    </footer>
 </body>
 
 </html>

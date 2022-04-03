@@ -30,24 +30,19 @@ Settings - Greenwatch
     <article class="media">
         <div class="media-content">
             <div class="content">
-                <a href="{% url 'home' %}">Home</a>
-            </div>
-        </div>
-    </article>
-
-    <article class="media">
-        <div class="media-content">
-            <div class="content">
-                <a href="{% url 'archive' %}">Archive</a>
-            </div>
-        </div>
-    </article>
-
-    <article class="media">
-        <div class="media-content">
-            <div class="content">
                 <a href="{% url 'reset_password' %}">Reset Your Password</a>
             </div>
+        </div>
+    </article>
+
+    <article class="media">
+        <div class="media-content">
+            <p><strong>Notification settings:</strong></p><br>
+            <form method="POST" action="{% url 'settings' %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Save Changes">
+            </form>
         </div>
     </article>
 {% endblock %}
