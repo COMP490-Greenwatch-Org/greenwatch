@@ -25,7 +25,9 @@ def settings(request):
 
 @login_required
 def archive(request):
-    return render(request, 'start/archive.html')
+    the_image = Image.objects.get(pk=1)
+    context = {'the_image' : the_image}
+    return render(request, 'start/archive.html', context)
 
 @login_required
 def profile(request):
