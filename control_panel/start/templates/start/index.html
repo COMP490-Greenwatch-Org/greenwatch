@@ -2,38 +2,127 @@
 {% load static %}
 {% block title %}Greenwatch{% endblock %}
 {% block banner %}
-<p class="title">
+<p class="title has-text-centered">
     Welcome to Greenwatch!
 </p>
-<p class="subtitle">
+<p class="subtitle has-text-centered">
     Your Lawn Care A.I. Assistant
 </p>
 {% endblock %}
 {% block content %}
+
 {% if not user.is_authenticated %}
+
+<section class="section">
+
+    <h1 class="is-size-3 has-text-centered has-text-weight-bold has-text-success">Hello!</h1>
+
+    <div class="columns is-centered">
+        <div class="column is-one-quarter has-text-right">
+            <h2>Already have an account?</h2>
+            <a class="button is-dark is-medium" href="{% url 'login' %}">
+                Log in here!
+            </a>
+        </div>
+        <div class="column is-one-quarter">
+            <h2>New to Greenwatch?</h2>
+            <a class="button is-success is-medium" href="{% url 'register' %}">
+                Sign up here!
+            </a>
+        </div>
+    </div>
+
+</section>
+
+
 <article class="media block">
     <div class="media-content">
         <div class="content">
-            <p>
-                <strong>What is Greenwatch?</strong>
-                <br> Hello and welcome to Greenwatch! greenwatch is a service dedicated to assessing
-                your lawn in order to give you the the best advice towards a healthier looking lawn.
-                Using AoT cameras, we will monitor and inform you on the current condition your lawn is in!
-            </p>
+                <p class="is-size-5 has-text-centered">Greenwatch is a service dedicated to assessing
+                    your lawn and giving you the the best advice to keep it healthy.           
+                </p> 
         </div>
     </div>
 </article>
 
-<h2>Already have an account?</h2>
-<a class="button is-dark" href="{% url 'login' %}">
-    Log in here!
-</a>
 
-<h2>New to Greenwatch?</h2>
-<a class="button is-success" href="{% url 'register' %}">
-    Sign up here!
-</a>
+
+
+
+<section class="section">
+    <div class="container">
+        <div class="columns is-centered is-vcentered">
+            <div class="column is-two-fifths">
+                <h1 class="is-size-3 has-text-centered">How does <b class="has-text-success">Greenwatch</b> work?</h1>
+                <p class="is-size-5">Greenwatch manages your lawncare, so you dont have to.
+                     Greenwatch uses AoT cameras to monitor your lawn, keeping track of
+                      any areas of concern and informs you on the current condition your
+                       lawn.
+                </p>          
+            </div>
+            <div class="column is-two-fifths">
+                    <div class="image">
+                        <img src="{% static 'start/grass (1).jpg' %}" alt="Placeholder image">
+                    </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="columns is-centered is-vcentered">
+            <div class="column is-two-fifths">
+                <div class="image">
+                    <img src="{% static 'start/grass (1).jpg' %}" alt="Placeholder image">
+                </div>
+            </div>
+            <div class="column is-two-fifths">
+                <h1 class="is-size-3 has-text-centered">How can <b class="has-text-success">Greenwatch</b> help me?</h1>
+                <p class="is-size-5">Greenwatch keeps track of shifting weather paterns
+                     and the condition of your lawn to make suggestions on how to keep
+                      your grass healthy and notifies you if there are any issues.
+                </p>          
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="columns is-centered  is-vcentered">
+            <div class="column is-two-fifths">
+                <h1 class="is-size-3 has-text-centered">What kinds of things can <b class="has-text-success">Greenwatch</b> do?</h1>
+                <p class="is-size-5">Greenwatch is customizable, it can send notifications based on
+                     your chosen criteria, be it grass height or health. You can choose how and
+                      when you want to reveive notifications.
+                </p>          
+            </div>
+            <div class="column is-two-fifths">
+                    <div class="image">
+                        <img src="{% static 'start/grass (1).jpg' %}" alt="Placeholder image">
+                    </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
 {% endif %}
+
+
+
+
+
+
+
+
 
 {% if user.is_authenticated %}
 <div class="block">
