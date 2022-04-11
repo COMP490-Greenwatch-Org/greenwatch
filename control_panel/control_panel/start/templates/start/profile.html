@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+My Profile - Greenwatch
+{% endblock %}
+
+{% block banner %}
+    <p class="title">
+        My Profile
+    </p>
+    <p class="subtitle">
+        View your account details
+    </p>
+{% endblock %}
+
+{% block content %}
+    <article class="media">
+        <div class="media-content">
+            <div class="content">
+                <strong>User Information:</strong>
+                <h1>Welcome, {{ user.username }}</h1>
+                <h2>This is your profile!</h2>
+                <h3>This account is registered under {{ user.email }}</h3>
+            </div>
+        </div>
+    </article>
+{% endblock %}
