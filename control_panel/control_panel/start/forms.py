@@ -27,3 +27,10 @@ class NotificationsForm(forms.ModelForm):
     class Meta:
         model = ExtendedUser
         fields = ['SMS_notifications', 'email_notifications', 'phone_number']
+
+class UserUpdateForm(forms.ModelForm):
+    email = forms.EmailField()
+
+    class Meta:
+        model = User
+        fields = ['username', 'email']
