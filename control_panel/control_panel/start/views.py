@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
-from .forms import ExtendedUserCreationForm, NotificationsForm
+from .forms import ExtendedUserCreationForm, NotificationsForm, UserUpdateForm
 from camera.models import Camera, Image
 from .notifications import notify
 from django.core.paginator import Paginator
@@ -13,16 +13,20 @@ def index(request):
     return render(request, 'start/index.html', context)
 
 @login_required
-def settings(request):
+def profile(request):
     if request.method =='POST':
-        form = NotificationsForm(request.POST, instance=request.user.extendeduser)
-        if form.is_valid():
-            form.save()
-            return redirect('settings')
+        u_form = UserUpdateForm(request.POST, instance = request.user)
+        n_form = NotificationsForm(request.POST, instance=request.user.extendeduser)
+        if u_form.is_valid() and n_form.is_valid():
+            u_form.save()
+            n_form.save()
+            return redirect('profile')
     else:
-        form = NotificationsForm(instance=request.user.extendeduser)
-    context = {"form" : form}
-    return render(request, 'start/settings.html', context)
+        u_form = UserUpdateForm(instance = request.user)
+        n_form = NotificationsForm(instance=request.user.extendeduser)
+
+    context = {"u_form" : u_form, "n_form" : n_form}
+    return render(request, 'start/profile.html', context)
 
 @login_required
 def archive(request):
@@ -37,10 +41,6 @@ def archive(request):
 
     context = {'the_image' : the_image, 'grouped_images' : grouped_images}
     return render(request, 'start/archive.html', context)
-
-@login_required
-def profile(request):
-    return render(request, 'start/profile.html')
 
 def register(request):
     if request.method == 'POST':
