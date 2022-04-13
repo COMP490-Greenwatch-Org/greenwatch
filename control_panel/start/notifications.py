@@ -18,3 +18,19 @@ def notify(request, title="Default title", body="Default body", att=None):
     if att:
         email.attach(att.image.name, att.image.read())
     email.send()
+
+#same as notify for now but want to implement an email base template to go with the registration,
+# password reset, and notification emails.
+def notify2(request, title="Default title", body="Default body", att=None):
+    html = render_to_string('auth_app/email/welcome.html', [request.user.email])
+    text = render_to_string('auth_app/email/welcome.txt', [request.user.email])
+    email = EmailMessage(
+        title,
+        template,
+        settings.EMAIL_HOST_USER,
+        [request.user.email],
+    )
+    email.fail_silently = False
+    if att:
+        email.attach(att.image.name, att.image.read())
+    email.send()
