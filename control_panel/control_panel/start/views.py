@@ -62,7 +62,24 @@ def register(request):
     return render(request, 'start/register.html', context)
 
 def about(request):
-    return render(request, 'start/about.html')
+    #temp method for testing functionality
+    if request.method == 'POST':
+        
+        the_image = Image.objects.get(pk=1)
+        notify(request, att=the_image)
+    
+    else:    
+        return render(request, 'start/about.html')
+
 
 def contact(request):
-    return render(request, 'start/contact.html')
+    #temp method for testing functionality
+    if request.method == 'POST':
+        contact_name = request.POST['contact-name']
+        contact_email = request.POST['contact-email']
+        contact_msg = request.POST['contact-msg']
+        
+        return render(request, 'start/contact.html', {'contact_name':contact_name})
+        
+    else:
+        return render(request, 'start/contact.html')

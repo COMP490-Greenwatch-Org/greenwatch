@@ -11,32 +11,20 @@
 
 {% block content %}
 <section class="section">
-    <div class="container">
-        <div class="columns">
-            <div class="column">
-                <h1 class="is-size-3 has-text-centered">What is Greenwatch?</h1>
-                <p>Greenwatch manages your lawncare, so you dont have to.
-                     Greenwatch uses existing security cameras to monitor
-                      your lawn, keeping track of any areas of
-                       concern and notifies you if theres any issues.
-                </p>          
-            </div>
-            <div class="column">
-                <h1 class="is-size-3 has-text-centered">How can Greenwatch help me?</h1>
-                <p>Greenwatch keeps track of shifting weather paterns and
-                     the condition of your lawn to make suggestions on how to
-                      keep your grass healthy.</p>
-            </div>
-            <div class="column">
-                <h1 class="is-size-3 has-text-centered">What kinds of things can Greenwatch do?</h1>
-                <p>Greenwatch is customizable, it can send notifications
-                     based on what matters to you, be it grass height
-                      or health. You can choose how and when you want
-                       to reveive notifications.</p>
-            </div>
+    <form method="POST" action="{% url 'contact' %}">
+        {% csrf_token %}
+        <!--sends email notification-->
+        <h1 class="title">
+            sends email notification to the current logged in user
+        </h1>
+        <div class="control">
+            <button class="button is-link is-success">
+                Send Notification
+            </button>
         </div>
 
-    </div>
+
+    </form>
 
 </section>
 
@@ -53,13 +41,13 @@
 
         <div class="column">
             <div class="image">
-                <img src="{% static 'start/logo/azure_logo.png' %}" alt="Placeholder image">
+                <img src="{% static 'control_panel/start/static/logo/azure_logo.png' %}" alt="Placeholder image">
             </div>
         </div>  
 
         <div class="column">
             <div class="image">
-                <img src="{% static 'start/logo/django_logo.png' %}" alt="Placeholder image">
+                <img src="{% static 'control_panel/start/static/logo/django_logo.png' %}" alt="Placeholder image">
             </div>
         </div> 
 
