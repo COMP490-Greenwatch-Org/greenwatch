@@ -11,7 +11,8 @@
 
 {% block content %}
 <section class="section">
-    <form method="POST" action="{% url 'contact' %}">
+    <h1>Hello: {{ username }}</h1>
+    <form method="POST" action="{% url 'about' %}">
         {% csrf_token %}
         <!--sends email notification-->
         <h1 class="title">

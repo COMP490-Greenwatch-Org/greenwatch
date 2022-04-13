@@ -57,10 +57,14 @@ def about(request):
     if request.method == 'POST':
         
         the_image = Image.objects.get(pk=1)
+        Image.objects.get(name="test1")
         notify(request, att=the_image)
     
     else:    
-        return render(request, 'start/about.html')
+        context = {
+            'username' : request.user.username
+        }
+        return render(request, 'start/about.html', context)
 
 
 def contact(request):
