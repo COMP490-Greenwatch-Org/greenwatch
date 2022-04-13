@@ -21,7 +21,9 @@ Login - Greenwatch
 
         <form method="POST" action="{% url 'login' %}">
             {% csrf_token %}
-            <strong>{{ form.non_field_errors }}</strong>
+            {% if form.errors %}
+                <strong class="input is-danger">{{ form.non_field_errors }}</strong>
+            {% endif %}
             <div class="field">
                 <label class="label">Username</label>
                 <div class="control">  
