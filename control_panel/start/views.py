@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from .forms import ExtendedUserCreationForm, NotificationsForm
 from camera.models import Camera, Image
-from .notifications import notify
+from .notifications import notify, notify2
 
 def index(request):
     username = request.user.username
@@ -57,13 +57,13 @@ def about(request):
     if request.method == 'POST':
         
         the_image = Image.objects.get(pk=1)
-        Image.objects.get(name="test1")
-        notify(request, att=the_image)
+        
+        notify2(request, att=the_image)
+        return render(request, 'start/about.html')
     
     else:    
-        context = {
-            'username' : request.user.username
-        }
+        the_image = Image.objects.get(pk=1)
+        context = {'the_image' : the_image}
         return render(request, 'start/about.html', context)
 
 

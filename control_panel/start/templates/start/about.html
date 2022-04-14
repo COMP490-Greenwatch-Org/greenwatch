@@ -12,6 +12,9 @@
 {% block content %}
 <section class="section">
     <h1>Hello: {{ username }}</h1>
+    <h1>results: {{the_image.results}}</h1>
+    <h1>date: {{the_image.date}}</h1>
+
     <form method="POST" action="{% url 'about' %}">
         {% csrf_token %}
         <!--sends email notification-->
@@ -42,37 +45,37 @@
 
         <div class="column">
             <div class="image">
-                <img src="{% static 'control_panel/start/static/logo/azure_logo.png' %}" alt="Placeholder image">
+                <img src="{% static 'logo/azure_logo.png' %}" alt="Placeholder image">
             </div>
         </div>  
 
         <div class="column">
             <div class="image">
-                <img src="{% static 'control_panel/start/static/logo/django_logo.png' %}" alt="Placeholder image">
+                <img src="{% static 'logo/django_logo.png' %}" alt="Placeholder image">
             </div>
         </div> 
 
         <div class="column">
             <div class="image">
-                <img src="{% static 'start/logo/ifttt_logo.png' %}" alt="Placeholder image">
+                <img src="{% static 'logo/ifttt_logo.png' %}" alt="Placeholder image">
             </div>
         </div> 
 
         <div class="column">
             <div class="image">
-                <img src="{% static 'start/logo/postgreSQL_logo.png' %}" alt="Placeholder image">
+                <img src="{% static 'logo/postgreSQL_logo.png' %}" alt="Placeholder image">
             </div>
         </div>  
 
         <div class="column">
             <div class="image">
-                <img src="{% static 'start/logo/python_logo.png' %}" alt="Placeholder image">
+                <img src="{% static 'logo/python_logo.png' %}" alt="Placeholder image">
             </div>
         </div>  
 
         <div class="column">
             <div class="image">
-                <img src="{% static 'start/logo/tensorflow_logo.png' %}" alt="Placeholder image">
+                <img src="{% static 'logo/tensorflow_logo.png' %}" alt="Placeholder image">
             </div>
         </div> 
 
