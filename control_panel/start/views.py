@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login
 from .forms import ExtendedUserCreationForm, NotificationsForm, UserUpdateForm
 from camera.models import Camera, Image
 from .notifications import notify
+from django.core.paginator import Paginator
 
 def index(request):
     username = request.user.username
@@ -29,8 +30,16 @@ def profile(request):
 
 @login_required
 def archive(request):
-    the_image = Image.objects.get(pk=1)
-    context = {'the_image' : the_image}
+    imagelist = Image.objects.all()
+
+    the_image = Paginator(imagelist, 3)
+
+    grouped_images = []
+    for page in the_image.page_range:
+        image_objects = the_image.page(page).object_list
+        grouped_images.append(image_objects)
+
+    context = {'the_image' : the_image, 'grouped_images' : grouped_images}
     return render(request, 'start/archive.html', context)
 
 def register(request):
