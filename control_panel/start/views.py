@@ -79,18 +79,7 @@ def register(request):
     return render(request, 'start/register.html', context)
 
 def about(request):
-    #temp method for testing functionality
-    if request.method == 'POST':
-        
-        the_image = Image.objects.get(pk=1)
-        
-        notify2(request, att=the_image)
         return render(request, 'start/about.html')
-    
-    else:    
-        the_image = Image.objects.get(pk=1)
-        context = {'the_image' : the_image}
-        return render(request, 'start/about.html', context)
 
 
 def contact(request):
@@ -104,3 +93,18 @@ def contact(request):
         
     else:
         return render(request, 'start/contact.html')
+    
+#Temporary page for testing functionality    
+def testing(request):
+    
+    if request.method == 'POST':
+        
+        the_image = Image.objects.get(pk=1)
+        
+        notify2(request, att=the_image)
+        return render(request, 'start/testing.html')
+    
+    else:    
+        the_image = Image.objects.get(pk=1)
+        context = {'the_image' : the_image}
+        return render(request, 'start/testing.html', context)
