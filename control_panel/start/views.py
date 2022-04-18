@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
-from .forms import ExtendedUserCreationForm, NotificationsForm
+from .forms import CamForm, ExtendedUserCreationForm, NotificationsForm
 from camera.models import Camera, Image
 from .notifications import notify
 from django.core.paginator import Paginator
@@ -40,7 +40,16 @@ def archive(request):
 
 @login_required
 def profile(request):
-    return render(request, 'start/profile.html')
+    if request.method == 'POST':
+        form = CamForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = CamForm()
+
+    context = {'form' : form}
+    return render(request, 'start/profile.html', context)
 
 def register(request):
     if request.method == 'POST':
