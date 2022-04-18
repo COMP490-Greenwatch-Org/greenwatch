@@ -43,8 +43,6 @@ def archive(request):
     context = {'the_image' : the_image, 'grouped_images' : grouped_images}
     return render(request, 'start/archive.html', context)
 
-<<<<<<< HEAD
-=======
 @login_required
 def profile(request):
     if request.method == 'POST':
@@ -58,7 +56,6 @@ def profile(request):
     context = {'form' : form}
     return render(request, 'start/profile.html', context)
 
->>>>>>> origin/archive
 def register(request):
     if request.method == 'POST':
         form = ExtendedUserCreationForm(request.POST)
