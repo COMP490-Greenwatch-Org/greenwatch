@@ -10,6 +10,7 @@
 
 
 {% block content %}
+<!--
 <section class="section">
     <h1>Hello: {{ username }}</h1>
     <h1>results: {{the_image.results}}</h1>
@@ -17,7 +18,7 @@
 
     <form method="POST" action="{% url 'about' %}">
         {% csrf_token %}
-        <!--sends email notification-->
+        <!sends email notification
         <h1 class="title">
             sends email notification to the current logged in user
         </h1>
@@ -31,6 +32,21 @@
     </form>
 
 </section>
+-->
+
+<section class="section">
+    <div class="container">
+        <div class="columns is-centered is-vcentered">
+            <div class="column is-two-fifths">
+                <h1 class="is-size-3 has-text-centered">Who made <b class="has-text-success">Greenwatch</b> ?</h1>
+                <p class="is-size-5">Greenwatch was developed by a group of Computer Science students
+                    at California State University. Carlos Gutierrez, Daniel Rivera Guerrero,
+                    Ernesto Gomez, Nicholas Barrios, and Steven Condor.
+                </p>          
+            </div>
+        </div>
+    </div>
+</section>
 
 <section>
     <div class="container">
@@ -39,6 +55,15 @@
         </h1>
     </div>
 </section>
+
+<article class="media block">
+    <div class="media-content">
+        <div class="content">
+                <p class="is-size-5 has-text-centered">A list of technologies that helped make our project possible.           
+                </p> 
+        </div>
+    </div>
+</article>
 
 <section>
     <div class="columns">
