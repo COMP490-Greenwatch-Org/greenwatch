@@ -19,9 +19,16 @@ My Profile - Greenwatch
         <div class="media-content">
             <div class="content">
                 <strong>User Information:</strong>
-                <h1>Welcome, {{ user.username }}</h1>
-                <h2>This is your profile!</h2>
-                <h3>This account is registered under {{ user.email }}</h3>
+                <br>Hello, {{ user.username }}!
+                <br> This account is registered under {{ user.email }}
+            </div>
+            <div class="media-content">
+                <p><strong>New Camera Setup:</strong></p><br>
+                <form method="POST" action="{% url 'profile' %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button class="button" type="Submit">Add Camera</button>
+                </form>
             </div>
         </div>
     </article>
