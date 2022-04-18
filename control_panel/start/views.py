@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
-from .forms import ExtendedUserCreationForm, NotificationsForm, UserUpdateForm
+from .forms import CamForm, ExtendedUserCreationForm, NotificationsForm, UserUpdateForm
 from camera.models import Camera, Image
 
 from .notifications import notify, notify2
@@ -43,6 +43,22 @@ def archive(request):
     context = {'the_image' : the_image, 'grouped_images' : grouped_images}
     return render(request, 'start/archive.html', context)
 
+<<<<<<< HEAD
+=======
+@login_required
+def profile(request):
+    if request.method == 'POST':
+        form = CamForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = CamForm()
+
+    context = {'form' : form}
+    return render(request, 'start/profile.html', context)
+
+>>>>>>> origin/archive
 def register(request):
     if request.method == 'POST':
         form = ExtendedUserCreationForm(request.POST)
