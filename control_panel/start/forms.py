@@ -37,6 +37,7 @@ class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['username', 'email']
+
 class CamForm(ModelForm):
     class Meta:
         model = Camera
