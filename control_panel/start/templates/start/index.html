@@ -134,7 +134,7 @@
         <div class="card">
             <div class="card-image">
                 <figure class="image">
-                    <video id="video" controls></video>
+                    <video id="video" controls muted></video>
                     <script>
                       var video = document.getElementById('video');
                       var videoSrc = 'http://greenwatch.eastus.cloudapp.azure.com:8888/ondemand/index.m3u8';
@@ -142,6 +142,9 @@
                         var hls = new Hls();
                         hls.loadSource(videoSrc);
                         hls.attachMedia(video);
+                        hls.on(Hls.Events.MANIFEST_PARSED,function() {
+                          video.play();
+                        });
                       }
                       // HLS.js is not supported on platforms that do not have Media Source
                       // Extensions (MSE) enabled.
