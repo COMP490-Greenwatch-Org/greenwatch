@@ -57,9 +57,10 @@
   </form>
 
 </section>
+{% if contact_name %}
 <h1 class="is-size-3 has-text-centered has-text-weight-bold has-text-success">
   Thank you, {{ contact_name }}, your message has been sent!
 </h1>
-
+{% endif %}
 
 {% endblock %}
