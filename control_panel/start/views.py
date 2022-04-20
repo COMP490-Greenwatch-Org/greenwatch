@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from .forms import CamForm, ExtendedUserCreationForm, NotificationsForm, UserUpdateForm
 from camera.models import Camera, Image
+from django.core.exceptions import ObjectDoesNotExist
+from .models import ExtendedUser
 
 from .notifications import notify, notify2
 from django.core.paginator import Paginator
@@ -26,7 +28,12 @@ def profile(request):
             return redirect('profile')
     else:
         u_form = UserUpdateForm(instance = request.user)
-        n_form = NotificationsForm(instance=request.user.extendeduser)
+        try:
+            n_form = NotificationsForm(instance=request.user.extendeduser)
+        except ObjectDoesNotExist:
+            ExtendedUser.objects.create(user=request.user)
+            n_form = NotificationsForm(instance=request.user.extendeduser)
+
         form = CamForm()
 
     context = {"u_form" : u_form, "n_form" : n_form, "form" : form}
