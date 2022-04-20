@@ -18,15 +18,18 @@ def profile(request):
     if request.method =='POST':
         u_form = UserUpdateForm(request.POST, instance = request.user)
         n_form = NotificationsForm(request.POST, instance=request.user.extendeduser)
-        if u_form.is_valid() and n_form.is_valid():
+        form = CamForm(request.POST)
+        if u_form.is_valid() and n_form.is_valid() and form.is_valid():
             u_form.save()
             n_form.save()
+            form.save()
             return redirect('profile')
     else:
         u_form = UserUpdateForm(instance = request.user)
         n_form = NotificationsForm(instance=request.user.extendeduser)
+        form = CamForm()
 
-    context = {"u_form" : u_form, "n_form" : n_form}
+    context = {"u_form" : u_form, "n_form" : n_form, "form" : form}
     return render(request, 'start/profile.html', context)
 
 @login_required
@@ -42,19 +45,6 @@ def archive(request):
 
     context = {'the_image' : the_image, 'grouped_images' : grouped_images}
     return render(request, 'start/archive.html', context)
-
-@login_required
-def profile(request):
-    if request.method == 'POST':
-        form = CamForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('profile')
-    else:
-        form = CamForm()
-
-    context = {'form' : form}
-    return render(request, 'start/profile.html', context)
 
 def register(request):
     if request.method == 'POST':
