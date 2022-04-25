@@ -10,23 +10,31 @@
 
 
 {% block content %}
+
+
 <section class="section">
-    <form method="POST" action="{% url 'contact' %}">
-        {% csrf_token %}
-        <!--sends email notification-->
-        <h1 class="title">
-            sends email notification to the current logged in user
-        </h1>
-        <div class="control">
-            <button class="button is-link is-success">
-                Send Notification
-            </button>
+    <div class="container">
+        <div class="columns is-centered is-vcentered">
+            <div class="column is-two-fifths">
+                <h1 class="is-size-3 has-text-centered">Who made <b class="has-text-success">Greenwatch</b> ?</h1>
+                <p class="is-size-5 has-text-centered">Greenwatch was developed by a group of Computer Science students
+                    at California State University.</p>
+                <br>
+                <block>
+                    <ul class="is-size-5 has-text-centered">
+                        <li>Carlos Gutierrez</li>
+                        <li>Daniel Rivera Guerrero</li>
+                        <li>Ernesto Gomez</li>
+                        <li>Nicholas Barrios</li>
+                        <li>Steven Condor</li>
+                    </ul>          
+                </block>
+            </div>
         </div>
-
-
-    </form>
-
+    </div>
 </section>
+
+
 
 <section>
     <div class="container">
@@ -36,18 +44,27 @@
     </div>
 </section>
 
+<article class="media block">
+    <div class="media-content">
+        <div class="content">
+                <p class="is-size-5 has-text-centered">A list of technologies that helped make our project possible.           
+                </p> 
+        </div>
+    </div>
+</article>
+
 <section>
     <div class="columns">
 
         <div class="column">
             <div class="image">
-                <img src="{% static 'control_panel/start/static/logo/azure_logo.png' %}" alt="Placeholder image">
+                <img src="{% static 'start/logo/azure_logo.png' %}" alt="Placeholder image">
             </div>
         </div>  
 
         <div class="column">
             <div class="image">
-                <img src="{% static 'control_panel/start/static/logo/django_logo.png' %}" alt="Placeholder image">
+                <img src="{% static 'start/logo/django_logo.png' %}" alt="Placeholder image">
             </div>
         </div> 
 

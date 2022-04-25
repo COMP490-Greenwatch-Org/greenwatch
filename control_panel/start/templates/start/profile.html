@@ -10,11 +10,22 @@ My Profile - Greenwatch
         My Profile
     </p>
     <p class="subtitle">
-        View your account details
+        View your account details, update your contact settings, set-up notifications, or reset your password
     </p>
 {% endblock %}
 
 {% block content %}
+    <article class="media">
+        <div class="media-content">
+            <div class="content">
+                <p>
+                    <strong>What will I do here?</strong>
+                    <br> This will be our settings page where you will be able to set your
+                    preferences such as how we will be communicating with you on your lawn
+                </p>
+            </div>
+        </div>
+    </article>
     <article class="media">
         <div class="media-content">
             <div class="content">
@@ -27,8 +38,58 @@ My Profile - Greenwatch
                 <form method="POST" action="{% url 'profile' %}">
                     {% csrf_token %}
                     {{ form.as_p }}
-                    <button class="button" type="Submit">Add Camera</button>
+                    <input type="submit" name="Camera" value="Add Camera">
                 </form>
+            </div>
+        </div>
+    </article>
+
+    {% for row in grouped_cameras %}
+    <div class="columns">
+        {% for the_camera in row %}
+        <div class="column">
+            <div class="tile is-ancestor">
+                <div class="tile is-15 is-vertical is-parent">
+                <div class="tile is-child box notification is-success">
+                    <span class="tag is-dark">Camera Name: {{ the_camera.name }}</span>
+                    <br> URL: {{the_camera.rtsp_url}} </p> Camera Type: {{the_camera.camera}}<br>
+                    <form method="POST" action="{% url 'profile' %}">
+                        {% csrf_token %}
+                        <input type="submit" name="Delete" value="Delete Camera">
+                    </form>
+                </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% if row|length == 1 %}
+            <div class="column"></div>
+            <div class="column"></div>
+        {% endif %}
+        
+        {% if row|length == 2 %}
+            <div class="column"></div>
+        {% endif %}
+
+    </div>
+    {% endfor %}
+
+    <article class="media">
+        <div class="media-content">
+            <p><strong>Profile settings:</strong></p><br>
+            <form method="POST" action="{% url 'profile' %}">
+                {% csrf_token %}
+                {{ u_form.as_p }}
+                {{ n_form.as_p }}
+                <input type="submit" name="Save" value="Save Changes">
+            </form>
+        </div>
+    </article>
+
+    <article class="media">
+        <div class="media-content">
+            <div class="content">
+                <a href="{% url 'reset_password' %}">Reset Your Password</a>
             </div>
         </div>
     </article>
