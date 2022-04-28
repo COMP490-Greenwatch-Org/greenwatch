@@ -26,4 +26,4 @@ class ExtendedUserCreationForm(UserCreationForm):
 class NotificationsForm(forms.ModelForm):
     class Meta:
         model = ExtendedUser
-        fields = ['SMS_notifications', 'email_notifications', 'phone_number']
+        fields = ['SMS_notifications', 'email_notifications', 'phone_number','notification_interval']
