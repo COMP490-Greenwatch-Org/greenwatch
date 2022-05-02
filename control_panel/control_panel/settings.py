@@ -16,6 +16,7 @@ from configurations import Configuration
 class Base(Configuration):
     # Build paths inside the project like this: BASE_DIR / 'subdir'.
     BASE_DIR = Path(__file__).resolve().parent.parent
+    print(BASE_DIR)
 
 
     # Quick-start development settings - unsuitable for production
@@ -79,21 +80,10 @@ class Base(Configuration):
     # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
     #Dev
-        #DATABASES = {
-        #'default': {
-            #'ENGINE': 'django.db.backends.sqlite3',
-            #'NAME': BASE_DIR / 'db.sqlite3',
-        #}
-    #}
-    
     DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'greenwatchDB',
-        'USER': 'postgres',
-        'PASSWORD': 'lol',
-        'HOST': 'localhost',
-        'PORT': '',
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
 
@@ -135,6 +125,7 @@ class Base(Configuration):
 
     STATIC_URL = 'static/'
     MEDIA_URL = 'media/'
+    MEDIA_ROOT = BASE_DIR / 'media'
 
     # Default primary key field type
     # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
