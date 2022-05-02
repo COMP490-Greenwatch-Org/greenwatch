@@ -135,3 +135,4 @@ training_val_loss_*.png
 neural_network/test_dataset/
 neural_network/dataset/
 neural_network/models/saved_models/
+control_panel/media

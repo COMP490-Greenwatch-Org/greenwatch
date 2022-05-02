@@ -1,9 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
-from .forms import ExtendedUserCreationForm, NotificationsForm
+from .forms import CamForm, ExtendedUserCreationForm, NotificationsForm, UserUpdateForm
 from camera.models import Camera, Image
-from .notifications import notify
+from django.core.exceptions import ObjectDoesNotExist
+from .models import ExtendedUser
+
+from .notifications import notify, notify2
+from django.core.paginator import Paginator
 
 def index(request):
     username = request.user.username
@@ -12,26 +16,42 @@ def index(request):
     return render(request, 'start/index.html', context)
 
 @login_required
-def settings(request):
+def profile(request):
     if request.method =='POST':
-        form = NotificationsForm(request.POST, instance=request.user.extendeduser)
-        if form.is_valid():
+        u_form = UserUpdateForm(request.POST, instance = request.user)
+        n_form = NotificationsForm(request.POST, instance=request.user.extendeduser)
+        form = CamForm(request.POST)
+        if u_form.is_valid() and n_form.is_valid() and form.is_valid():
+            u_form.save()
+            n_form.save()
             form.save()
-            return redirect('settings')
+            return redirect('profile')
     else:
-        form = NotificationsForm(instance=request.user.extendeduser)
-    context = {"form" : form}
-    return render(request, 'start/settings.html', context)
+        u_form = UserUpdateForm(instance = request.user)
+        try:
+            n_form = NotificationsForm(instance=request.user.extendeduser)
+        except ObjectDoesNotExist:
+            ExtendedUser.objects.create(user=request.user)
+            n_form = NotificationsForm(instance=request.user.extendeduser)
+
+        form = CamForm()
+
+    context = {"u_form" : u_form, "n_form" : n_form, "form" : form}
+    return render(request, 'start/profile.html', context)
 
 @login_required
 def archive(request):
-    the_image = Image.objects.get(pk=1)
-    context = {'the_image' : the_image}
-    return render(request, 'start/archive.html', context)
+    imagelist = Image.objects.all()
 
-@login_required
-def profile(request):
-    return render(request, 'start/profile.html')
+    the_image = Paginator(imagelist, 3)
+
+    grouped_images = []
+    for page in the_image.page_range:
+        image_objects = the_image.page(page).object_list
+        grouped_images.append(image_objects)
+
+    context = {'the_image' : the_image, 'grouped_images' : grouped_images}
+    return render(request, 'start/archive.html', context)
 
 def register(request):
     if request.method == 'POST':
@@ -53,13 +73,6 @@ def register(request):
     return render(request, 'start/register.html', context)
 
 def about(request):
-    #temp method for testing functionality
-    if request.method == 'POST':
-        
-        the_image = Image.objects.get(pk=1)
-        notify(request, att=the_image)
-    
-    else:    
         return render(request, 'start/about.html')
 
 
@@ -74,3 +87,18 @@ def contact(request):
         
     else:
         return render(request, 'start/contact.html')
+    
+#Temporary page for testing functionality    
+def testing(request):
+    
+    if request.method == 'POST':
+        
+        the_image = Image.objects.get(pk=1)
+        
+        notify2(request, att=the_image)
+        return render(request, 'start/testing.html')
+    
+    else:    
+        the_image = Image.objects.get(pk=1)
+        context = {'the_image' : the_image}
+        return render(request, 'start/testing.html', context)

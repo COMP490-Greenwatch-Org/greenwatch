@@ -10,7 +10,7 @@ My Profile - Greenwatch
         My Profile
     </p>
     <p class="subtitle">
-        View your account details
+        View your account details, update your contact settings, set-up notifications, or reset your password
     </p>
 {% endblock %}
 
@@ -18,10 +18,131 @@ My Profile - Greenwatch
     <article class="media">
         <div class="media-content">
             <div class="content">
+                <p>
+                    <strong>What will I do here?</strong>
+                    <br> This will be our settings page where you will be able to set your
+                    preferences such as how we will be communicating with you on your lawn
+                </p>
+            </div>
+        </div>
+    </article>
+    <article class="media">
+        <div class="media-content">
+            <div class="content">
                 <strong>User Information:</strong>
-                <h1>Welcome, {{ user.username }}</h1>
-                <h2>This is your profile!</h2>
-                <h3>This account is registered under {{ user.email }}</h3>
+                <br>Hello, {{ user.username }}!
+                <br> This account is registered under {{ user.email }}
+            </div>
+            <div class="media-content">
+                <p><strong>New Camera Setup:</strong></p><br>
+                <form method="POST" action="{% url 'profile' %}">
+                    {% csrf_token %}
+                    {{ form.non_field_errors }}
+                    <div class="field">
+                        <label class="label">Name</label>
+                        <div class="control">  
+                            <input class="input" type="text" placeholder="Name" required {{ form.name }}
+                        </div>
+                        {% if form.name.errors %}
+                            <ol>
+                            {% for error in form.name.errors %}
+                                <li class="input is-danger"><strong>{{ error|escape }}</strong></li>
+                            {% endfor %}
+                            </ol>
+                        {% endif %}
+                        {{ form.name.help_text }}
+                    </div>
+                    <div class="field">
+                        <label class="label">rtsp_url</label>
+                        <div class="control">  
+                            <input class="input" type="text" placeholder="rtsp_url" required {{ form.rtsp_url }}
+                        </div>
+                        {% if form.rtsp_url.errors %}
+                            <ol>
+                            {% for error in form.rtsp_url.errors %}
+                                <li class="input is-danger"><strong>{{ error|escape }}</strong></li>
+                            {% endfor %}
+                            </ol>
+                        {% endif %}
+                        {{ form.rtsp_url.help_text }}
+                    </div>
+                    <div class="field">
+                        <label class="label">Camera</label>
+                        <div class="control">  
+                            <div class="select" required>
+                                {{ form.camera }}
+                            </div>
+                        </div>
+                    </div>
+                    <button class="button" type="Submit">Add Camera</button>
+
+                </form>
+            </div>
+        </div>
+    </article>
+
+    <article class="media">
+        <div class="media-content">
+            <p><strong>Profile settings:</strong></p><br>
+            <form method="POST" action="{% url 'profile' %}">
+                {% csrf_token %}
+                {{ u_form.non_field_errors }}
+                <div class="field">
+                    <label class="label">Username</label>
+                    <div class="control">  
+                      <input class="input" type="text" value = "{{ user.username }}" required {{ u_form.username }}
+                    </div>
+                    {% if u_form.username.errors %}
+                      <ol>
+                        {% for error in u_form.username.errors %}
+                          <li class="input is-danger"><strong>{{ error|escape }}</strong></li>
+                        {% endfor %}
+                      </ol> 
+                    {% endif %}
+                    {{ u_form.username.help_text }}
+                </div>
+                
+                <div class="field"> 
+                    <label class="label">Email</label>
+                    <div class="control">
+                      <input class="input" type="email" value="{{ user.email }}" required {{ u_form.email }}
+                    </div>
+                    {% if u_form.email.errors %}
+                      <ol>
+                        {% for error in u_form.email.errors %}
+                          <li class="input is-danger"><strong>{{ error|escape }}</strong></li>
+                        {% endfor %}
+                      </ol>
+                    {% endif %}
+                </div>
+                {{ n_form.non_field_errors }}
+                <div class="field"> 
+                    <label class="label">SMS Notifications:</label>
+                    <div class="control">
+                        <input  type="checkbox" {{ n_form.SMS_notifications }}
+                    </div>
+                </div>
+                <div class="field"> 
+                    <label class="label">Email Notifications:</label>
+                    <div class="control">
+                        <input type="checkbox" {{ n_form.email_notifications }}
+                    </div>
+                </div>
+                <div class="field"> 
+                    <label class="label">Phone Number:</label>
+                    <div class="control">
+                        <input class="input" type="text" {{ n_form.phone_number }}
+                    </div>
+                </div>
+                <input type="submit" value="Save Changes">
+            </form>
+        </div>
+    </article>
+
+    <article class="media">
+        <div class="media-content">
+            <div class="content">
+                <a href="{% url 'reset_password' %}">Reset Your Password</a>
             </div>
         </div>
     </article>
