@@ -37,51 +37,104 @@ My Profile - Greenwatch
                 <p><strong>New Camera Setup:</strong></p><br>
                 <form method="POST" action="{% url 'profile' %}">
                     {% csrf_token %}
-                    {{ form.as_p }}
-                    <input type="submit" name="Camera" value="Add Camera">
+                    {{ form.non_field_errors }}
+                    <div class="field">
+                        <label class="label">Name</label>
+                        <div class="control">  
+                            <input class="input" type="text" placeholder="Name" required {{ form.name }}
+                        </div>
+                        {% if form.name.errors %}
+                            <ol>
+                            {% for error in form.name.errors %}
+                                <li class="input is-danger"><strong>{{ error|escape }}</strong></li>
+                            {% endfor %}
+                            </ol>
+                        {% endif %}
+                        {{ form.name.help_text }}
+                    </div>
+                    <div class="field">
+                        <label class="label">rtsp_url</label>
+                        <div class="control">  
+                            <input class="input" type="text" placeholder="rtsp_url" required {{ form.rtsp_url }}
+                        </div>
+                        {% if form.rtsp_url.errors %}
+                            <ol>
+                            {% for error in form.rtsp_url.errors %}
+                                <li class="input is-danger"><strong>{{ error|escape }}</strong></li>
+                            {% endfor %}
+                            </ol>
+                        {% endif %}
+                        {{ form.rtsp_url.help_text }}
+                    </div>
+                    <div class="field">
+                        <label class="label">Camera</label>
+                        <div class="control">  
+                            <div class="select" required>
+                                {{ form.camera }}
+                            </div>
+                        </div>
+                    </div>
+                    <button class="button" type="Submit">Add Camera</button>
+
                 </form>
             </div>
         </div>
     </article>
-
-    {% for row in grouped_cameras %}
-    <div class="columns">
-        {% for the_camera in row %}
-        <div class="column">
-            <div class="tile is-ancestor">
-                <div class="tile is-15 is-vertical is-parent">
-                <div class="tile is-child box notification is-success">
-                    <span class="tag is-dark">Camera Name: {{ the_camera.name }}</span>
-                    <br> URL: {{the_camera.rtsp_url}} </p> Camera Type: {{the_camera.camera}}<br>
-                    <form method="POST" action="{% url 'profile' %}">
-                        {% csrf_token %}
-                        <input type="submit" name="Delete" value="Delete Camera">
-                    </form>
-                </div>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-        {% if row|length == 1 %}
-            <div class="column"></div>
-            <div class="column"></div>
-        {% endif %}
-        
-        {% if row|length == 2 %}
-            <div class="column"></div>
-        {% endif %}
-
-    </div>
-    {% endfor %}
 
     <article class="media">
         <div class="media-content">
             <p><strong>Profile settings:</strong></p><br>
             <form method="POST" action="{% url 'profile' %}">
                 {% csrf_token %}
-                {{ u_form.as_p }}
-                {{ n_form.as_p }}
-                <input type="submit" name="Save" value="Save Changes">
+                {{ u_form.non_field_errors }}
+                <div class="field">
+                    <label class="label">Username</label>
+                    <div class="control">  
+                      <input class="input" type="text" value = "{{ user.username }}" required {{ u_form.username }}
+                    </div>
+                    {% if u_form.username.errors %}
+                      <ol>
+                        {% for error in u_form.username.errors %}
+                          <li class="input is-danger"><strong>{{ error|escape }}</strong></li>
+                        {% endfor %}
+                      </ol> 
+                    {% endif %}
+                    {{ u_form.username.help_text }}
+                </div>
+                
+                <div class="field"> 
+                    <label class="label">Email</label>
+                    <div class="control">
+                      <input class="input" type="email" value="{{ user.email }}" required {{ u_form.email }}
+                    </div>
+                    {% if u_form.email.errors %}
+                      <ol>
+                        {% for error in u_form.email.errors %}
+                          <li class="input is-danger"><strong>{{ error|escape }}</strong></li>
+                        {% endfor %}
+                      </ol>
+                    {% endif %}
+                </div>
+                {{ n_form.non_field_errors }}
+                <div class="field"> 
+                    <label class="label">SMS Notifications:</label>
+                    <div class="control">
+                        <input  type="checkbox" {{ n_form.SMS_notifications }}
+                    </div>
+                </div>
+                <div class="field"> 
+                    <label class="label">Email Notifications:</label>
+                    <div class="control">
+                        <input type="checkbox" {{ n_form.email_notifications }}
+                    </div>
+                </div>
+                <div class="field"> 
+                    <label class="label">Phone Number:</label>
+                    <div class="control">
+                        <input class="input" type="text" {{ n_form.phone_number }}
+                    </div>
+                </div>
+                <input type="submit" value="Save Changes">
             </form>
         </div>
     </article>
