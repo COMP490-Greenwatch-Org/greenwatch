@@ -17,15 +17,30 @@ def index(request):
 
 @login_required
 def profile(request):
-    if request.method =='POST':
+    cameralist = Camera.objects.all()
+    the_camera = Paginator(cameralist,3)
+
+    grouped_cameras = []
+    for page in the_camera.page_range:
+        camera_objects = the_camera.page(page).object_list
+        grouped_cameras.append(camera_objects)
+        
+    if request.method =='POST' and 'Save' in request.POST:
         u_form = UserUpdateForm(request.POST, instance = request.user)
         n_form = NotificationsForm(request.POST, instance=request.user.extendeduser)
-        form = CamForm(request.POST)
-        if u_form.is_valid() and n_form.is_valid() and form.is_valid():
+        if u_form.is_valid() and n_form.is_valid():
             u_form.save()
             n_form.save()
+            return redirect('profile')
+    elif request.method =='POST' and 'Camera' in request.POST:
+        form = CamForm(request.POST)
+        if form.is_valid():
             form.save()
             return redirect('profile')
+    elif request.method =='POST' and 'Delete' in request.POST:
+        form = CamForm(request.POST)
+        cameralist.delete()
+        return redirect('profile')
     else:
         u_form = UserUpdateForm(instance = request.user)
         try:
@@ -34,9 +49,9 @@ def profile(request):
             ExtendedUser.objects.create(user=request.user)
             n_form = NotificationsForm(instance=request.user.extendeduser)
 
-        form = CamForm()
-
-    context = {"u_form" : u_form, "n_form" : n_form, "form" : form}
+    form = CamForm()
+    
+    context = {"u_form" : u_form, "n_form" : n_form, "form" : form, 'the_camera' : the_camera, 'grouped_cameras' : grouped_cameras}
     return render(request, 'start/profile.html', context)
 
 @login_required
