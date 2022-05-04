@@ -26,7 +26,7 @@ My Profile - Greenwatch
             </div>
         </div>
     </article>
-    <article class="media">
+    <div class="media block">
         <div class="media-content">
             <div class="content">
                 <strong>User Information:</strong>
@@ -34,7 +34,7 @@ My Profile - Greenwatch
                 <br> This account is registered under {{ user.email }}
             </div>
             <div class="media-content">
-                <p><strong>New Camera Setup:</strong></p><br>
+                <h4 class="title is-4">New Camera Setup:</h4>
                 <form method="POST" action="{% url 'profile' %}">
                     {% csrf_token %}
                     {{ form.non_field_errors }}
@@ -79,8 +79,9 @@ My Profile - Greenwatch
                 </form>
             </div>
         </div>
-    </article>
+    </div>
 
+    <h4 class="title is-4">Existing Cameras:</h4>
     {% for row in grouped_cameras %}
     <div class="columns">
         {% for the_camera in row %}
@@ -107,13 +108,12 @@ My Profile - Greenwatch
         {% if row|length == 2 %}
             <div class="column"></div>
         {% endif %}
-
     </div>
     {% endfor %}
 
     <article class="media">
         <div class="media-content">
-            <p><strong>Profile settings:</strong></p><br>
+            <h4 class="title is-4">Profile Settings:</h4>
             <form method="POST" action="{% url 'profile' %}">
                 {% csrf_token %}
                 {{ u_form.non_field_errors }}
