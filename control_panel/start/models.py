@@ -13,7 +13,7 @@ class ExtendedUser(models.Model):
     notification_interval = models.CharField(
         max_length = 11,
         default = 'weekly',
-        choices = [('Immediately','immediate'),('Daily','daily'),('Weekly','weekly')] 
+        choices = [('immediate','Immediately'),('daily','Daily'),('weekly','Weekly')] 
     )
 
 
