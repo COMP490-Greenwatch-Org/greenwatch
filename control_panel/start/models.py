@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 import datetime
 
 
@@ -10,7 +11,7 @@ class ExtendedUser(models.Model):
     SMS_notifications = models.BooleanField(default=True)
     email_notifications = models.BooleanField(default=True)
     phone_number = models.CharField(max_length=12,default='000-000-0000')
-    latest_notify = models.DateField(default = datetime.date.today(), null=True)
+    latest_notify = models.DateField(default = timezone.now, null=True)
     
     notification_interval = models.CharField(
         max_length = 11,

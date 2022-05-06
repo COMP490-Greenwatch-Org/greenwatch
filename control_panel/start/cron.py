@@ -11,7 +11,7 @@ def predictImages():
         img.results = "70%" #<------ predict function from prediction_single.py
         img.save(update_fields=['results'])
         User = img.camera.user
-        if  User.extendeduser.notification_interval == 'inmediate':
+        if  User.extendeduser.notification_interval == 'immediate':
             sendNotify(User, img)
 
 def notifyUsers():
