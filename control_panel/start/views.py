@@ -39,7 +39,6 @@ def profile(request):
             return redirect('profile')
     elif request.method =='POST' and 'Delete' in request.POST:
         form = CamForm(request.POST)
-        cameralist.delete()
         return redirect('profile')
     else:
         u_form = UserUpdateForm(instance = request.user)
