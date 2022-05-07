@@ -41,10 +41,11 @@ def profile(request):
             notifications_form.save()
             return redirect('profile')
     elif request.method =='POST' and 'Camera' in request.POST:
-        user_form = UserUpdateForm(instance = request.user)
         camera_form = CamForm(request.POST)
         if camera_form.is_valid():
-            camera_form.save()
+            camera = camera_form.save(commit=False)
+            camera.user = request.user
+            camera.save()
             return redirect('profile')
     elif request.method =='POST' and 'Delete' in request.POST:
         camera_id = request.POST['camera_id']
