@@ -101,6 +101,7 @@ My Profile - Greenwatch
                         <div class="block">
                             <form method="POST" action="{% url 'profile' %}">
                                 {% csrf_token %}
+                                <input type="hidden" name="camera_id" value="{{ the_camera.id }}">
                                 <div class="field">
                                     <div class="control">
                                         <button type="submit" class="button is-danger" name="Delete"
