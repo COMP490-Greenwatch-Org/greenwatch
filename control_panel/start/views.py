@@ -17,7 +17,7 @@ def index(request):
 
 @login_required
 def profile(request):
-    cameralist = Camera.objects.all()
+    cameralist = Camera.objects.filter(user=request.user.id)
     the_camera = Paginator(cameralist,3)
 
     grouped_cameras = []
@@ -59,7 +59,12 @@ def profile(request):
 
 @login_required
 def archive(request):
-    imagelist = Image.objects.all()
+    imagelist = []
+    cameraList = Camera.objects.filter(user=request.user.id)
+    for camera in cameraList:
+        image_list = Image.objects.filter(camera=camera.id)
+        for img in image_list:
+            imagelist.append(img)
 
     the_image = Paginator(imagelist, 3)
 
