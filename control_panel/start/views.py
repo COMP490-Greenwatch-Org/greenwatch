@@ -25,32 +25,36 @@ def profile(request):
         camera_objects = the_camera.page(page).object_list
         grouped_cameras.append(camera_objects)
         
+    camera_form = CamForm()
+    user_form = UserUpdateForm(instance = request.user)
+    try:
+        notifications_form = NotificationsForm(instance=request.user.extendeduser)
+    except ObjectDoesNotExist:
+        ExtendedUser.objects.create(user=request.user)
+        notifications_form = NotificationsForm(instance=request.user.extendeduser)
+
     if request.method =='POST' and 'Save' in request.POST:
-        u_form = UserUpdateForm(request.POST, instance = request.user)
-        n_form = NotificationsForm(request.POST, instance=request.user.extendeduser)
-        if u_form.is_valid() and n_form.is_valid():
-            u_form.save()
-            n_form.save()
+        user_form = UserUpdateForm(request.POST, instance = request.user)
+        notifications_form = NotificationsForm(request.POST, instance=request.user.extendeduser)
+        if user_form.is_valid() and notifications_form.is_valid():
+            user_form.save()
+            notifications_form.save()
             return redirect('profile')
     elif request.method =='POST' and 'Camera' in request.POST:
-        form = CamForm(request.POST)
-        if form.is_valid():
-            form.save()
+        user_form = UserUpdateForm(instance = request.user)
+        camera_form = CamForm(request.POST)
+        if camera_form.is_valid():
+            camera_form.save()
             return redirect('profile')
     elif request.method =='POST' and 'Delete' in request.POST:
-        form = CamForm(request.POST)
-        return redirect('profile')
-    else:
-        u_form = UserUpdateForm(instance = request.user)
+        camera_id = request.POST['camera_id']
         try:
-            n_form = NotificationsForm(instance=request.user.extendeduser)
-        except ObjectDoesNotExist:
-            ExtendedUser.objects.create(user=request.user)
-            n_form = NotificationsForm(instance=request.user.extendeduser)
-
-    form = CamForm()
+            Camera.objects.get(id=camera_id).delete()
+        except Camera.DoesNotExist:
+            pass
+        return redirect('profile')
     
-    context = {"u_form" : u_form, "n_form" : n_form, "form" : form, 'the_camera' : the_camera, 'grouped_cameras' : grouped_cameras}
+    context = {"u_form" : user_form, "n_form" : notifications_form, "form" : camera_form, 'the_camera' : the_camera, 'grouped_cameras' : grouped_cameras}
     return render(request, 'start/profile.html', context)
 
 @login_required
