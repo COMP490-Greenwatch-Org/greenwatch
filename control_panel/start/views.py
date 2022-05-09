@@ -17,7 +17,7 @@ def index(request):
 
 @login_required
 def profile(request):
-    cameralist = Camera.objects.filter(user=request.user.id)
+    cameralist = Camera.objects.filter(user=request.user.id).order_by('id')
     the_camera = Paginator(cameralist,3)
 
     grouped_cameras = []
