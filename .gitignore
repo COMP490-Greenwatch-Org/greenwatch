@@ -136,3 +136,4 @@ neural_network/test_dataset/
 neural_network/dataset/
 neural_network/models/saved_models/
 control_panel/media
+control_panel/control_panel/secrets.py
